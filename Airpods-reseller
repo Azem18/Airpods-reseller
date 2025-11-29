@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AirPods Shop</title>
+<style>
+body {font-family: Arial, sans-serif;text-align:center;background:#f4f4f4;margin:0;padding:0;}
+header{background:#4CAF50;color:white;padding:1em 0;display:flex;justify-content:space-between;align-items:center;}
+button {padding:5px 10px;margin:5px;cursor:pointer;border:none;border-radius:4px;background:#45a049;color:white;}
+button:hover{background:#3e8e41;}
+nav{margin:1em 0;}
+nav a{text-decoration:none;margin:0 10px;color:#4CAF50;font-weight:bold;}
+nav a:hover{color:#45a049;}
+#productList{display:flex;flex-wrap:wrap;justify-content:center;margin:2em 0;}
+.productCard{border:1px solid #ccc;border-radius:5px;background:white;margin:1em;padding:1em;width:200px;}
+.productCard img{width:100%;border-radius:5px;}
+#adminPanel{display:none;background:#fff;padding:1em;margin:1em auto;max-width:300px;border:1px solid #ccc;border-radius:5px;}
+footer{background:#333;color:white;padding:1em 0;margin-top:2em;}
+@media (max-width:600px){h1{font-size:1.5rem;}.productCard{width:90%;margin:0.5em;}}
+select,input{width:90%;margin:3px 0;padding:5px;}
+</style>
+</head>
+<body>
+
+<header>
+<h1>AirPods Shop</h1>
+<button onclick="showLogin()">Admin Login</button>
+</header>
+
+<nav>
+<a href="#products">Produkter</a>
+<a href="#contact">Kontakt</a>
+</nav>
+
+<div id="loginPanel" style="display:none;margin:1em;">
+<input type="password" id="adminPass" placeholder="Lösenord">
+<button onclick="login()">Logga in</button>
+</div>
+
+<div id="adminPanel">
+<h3>Admin Panel</h3>
+<input type="text" id="prodName" placeholder="Produktnamn"><br>
+<input type="text" id="prodYear" placeholder="Årsmodell"><br>
+<input type="text" id="prodGen" placeholder="Generation"><br>
+<input type="text" id="prodFunc" placeholder="Funktioner"><br>
+<input type="text" id="prodPrice" placeholder="Pris"><br>
+<select id="prodImg">
+<option value="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MWP22?wid=200&hei=200&fmt=png-alpha&.v=1591634795000">AirPods Pro</option>
+<option value="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MWP63?wid=200&hei=200&fmt=png-alpha&.v=1645036270645">AirPods Pro 2</option>
+<option value="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/airpods-3rd-gen-hero-200?wid=200&hei=200&fmt=png-alpha&.v=1632861348000">AirPods 3</option>
+<option value="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MMEF2?wid=200&hei=200&fmt=png-alpha&.v=1591634795000">AirPods 2</option>
+<option value="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MV7N2?wid=200&hei=200&fmt=png-alpha&.v=1591634795000">AirPods 1</option>
+</select><br>
+<button onclick="addProduct()">Lägg till produkt</button>
+<button onclick="logout()">Logga ut</button>
+</div>
+
+<main>
+<section id="products">
+<div id="productList">
+<!-- Preloaded products -->
+<div class="productCard">
+<img src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MWP22?wid=200&hei=200&fmt=png-alpha&.v=1591634795000" alt="AirPods Pro">
+<h3>AirPods Pro</h3>
+<p>Årsmodell: 2019</p>
+<p>Generation: 1</p>
+<p>Funktioner: Aktiv brusreducering, Transparency-läge, Trådlös laddning</p>
+<p>Pris: 2,499 kr</p>
+</div>
+<div class="productCard">
+<img src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MWP63?wid=200&hei=200&fmt=png-alpha&.v=1645036270645" alt="AirPods Pro 2">
+<h3>AirPods Pro 2</h3>
+<p>Årsmodell: 2022</p>
+<p>Generation: 2</p>
+<p>Funktioner: Förbättrad ANC, Adaptiv EQ, H1-chip, MagSafe-laddning</p>
+<p>Pris: 3,099 kr</p>
+</div>
+<div class="productCard">
+<img src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/airpods-3rd-gen-hero-200?wid=200&hei=200&fmt=png-alpha&.v=1632861348000" alt="AirPods 3">
+<h3>AirPods 3</h3>
+<p>Årsmodell: 2021</p>
+<p>Generation: 3</p>
+<p>Funktioner: Spatial Audio, Adaptiv EQ, Trådlös laddning</p>
+<p>Pris: 1,999 kr</p>
+</div>
+<div class="productCard">
+<img src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MMEF2?wid=200&hei=200&fmt=png-alpha&.v=1591634795000" alt="AirPods 2">
+<h3>AirPods 2</h3>
+<p>Årsmodell: 2019</p>
+<p>Generation: 2</p>
+<p>Funktioner: H1-chip, Siri-styrning, Trådlös laddning</p>
+<p>Pris: 1,499 kr</p>
+</div>
+<div class="productCard">
+<img src="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MV7N2?wid=200&hei=200&fmt=png-alpha&.v=1591634795000" alt="AirPods 1">
+<h3>AirPods 1</h3>
+<p>Årsmodell: 2016</p>
+<p>Generation: 1</p>
+<p>Funktioner: Bluetooth 4.2, Siri-styrning</p>
+<p>Pris: 999 kr</p>
+</div>
+</div>
+</section>
+
+<section id="contact">
+<h2>Kontakt</h2>
+<p>Maila oss på: info@airpods-shop.se</p>
+<p>Telefon: 08-123 456 78</p>
+</section>
+</main>
+
+<footer>
+<p>&copy; 2025 AirPods Shop</p>
+</footer>
+
+<script>
+const adminPassword = "1234";
+function showLogin() { document.getElementById('loginPanel').style.display = 'block'; }
+function login() {
+  const pass = document.getElementById('adminPass').value;
+  if(pass===adminPassword){
+    document.getElementById('loginPanel').style.display='none';
+    document.getElementById('adminPanel').style.display='block';
+    alert("Inloggad som admin!");
+  } else alert("Fel lösenord!");
+}
+function logout(){
+  document.getElementById('adminPanel').style.display='none';
+  alert("Utloggad!");
+}
+function addProduct(){
+  const name=document.getElementById('prodName').value;
+  const year=document.getElementById('prodYear').value;
+  const gen=document.getElementById('prodGen').value;
+  const func=document.getElementById('prodFunc').value;
+  const price=document.getElementById('prodPrice').value;
+  const img=document.getElementById('prodImg').value;
+  if(!name||!year||!gen||!func||!price||!img){ alert("Fyll i alla fält!"); return; }
+  const card=document.createElement('div');
+  card.className="productCard";
+  card.innerHTML=`<img src="${img}" alt="${name}"><h3>${name}</h3><p>Årsmodell: ${year}</p><p>Generation: ${gen}</p><p>Funktioner: ${func}</p><p>Pris: ${price}</p>`;
+  document.getElementById('productList').appendChild(card);
+  document.getElementById('prodName').value='';
+  document.getElementById('prodYear').value='';
+  document.getElementById('prodGen').value='';
+  document.getElementById('prodFunc').value='';
+  document.getElementById('prodPrice').value='';
+}
+</script>
+
+</body>
+</html>
